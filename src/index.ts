@@ -8,21 +8,32 @@ class Product {
   id: number;
   name: string;
   price: number;
+
+  static findProductsBelow(precioBase:number): Product[]{
+    var prods = products.filter((p) => {
+      return p.price < precioBase
+    })
+    return prods
+  }
 }
 
 class User {
+  
   constructor(name: string) {
     this.name = name;
   }
+  
   name: string;
   products: Product[] = [];
+
   addProduct(newProduct: Product) {
     this.products.push(newProduct);
   }
+
   addProducts(newProducts: Product[]) {
-    // esto no funciona:
-    this.products.push(newProducts);
-    // pista: push no suma muchos items (agrega de a uno)
+    newProducts.forEach(p => {
+      this.products.push(p)      
+    });
   }
 }
 
